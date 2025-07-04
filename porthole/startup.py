@@ -81,8 +81,8 @@ def create_dir(new_dir):
     print("STARTUP: create_dir; ", new_dir + " does not exist, creating...")
     try:
         os.mkdir(new_dir)
-    except OSError as xxx_todo_changeme:
-        (errnum, errmsg) = xxx_todo_changeme.args
+    except OSError as e:
+        errnum, errmsg = e.args
         print("Failed to create %s:" % new_dir, errmsg)
 
 
