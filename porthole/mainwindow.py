@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Main Window
     The main interface the user will interact with
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 import datetime
 _id = datetime.datetime.now().microsecond
 print("MAINWINDOW: id initialized to ", _id)
@@ -161,7 +161,7 @@ class MainWindow(PluginHandler):
         self.reader_running = False
         self.reader = None
         # populate the view_filter menu
-        self.widget["view_filter_list"] = Gtk.ListStore(str)
+        self.widget["view_filter_list"] = Gtk.ListStore()
         for i in [_("All Packages"), _("Installed Packages"),
                     _("Search Results"), _("Upgradable Packages"),
                     _("Deprecated Packages"), _("Sets")]:
@@ -719,8 +719,8 @@ class MainWindow(PluginHandler):
             #debug.dprint(type(self.current_cat_cursor["All_Installed"]))
             if (self.current_cat_cursor[INDEX_TYPES[mode]] != None) \
                     and \
-                    (self.current_cat_cursor[INDEX_TYPES[mode]] != \
-                    [None, None]):
+                    (self.current_cat_cursor[INDEX_TYPES[mode]] !=
+                     [None, None]):
                 # re-select the category
                 try:
                     self.category_view.set_cursor(

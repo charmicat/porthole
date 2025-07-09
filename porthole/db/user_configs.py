@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole user_configs module
     Holds all portage user config data functions for Porthole
 
@@ -19,7 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 _id = datetime.datetime.now().microsecond
@@ -343,7 +343,7 @@ class UserConfigs:
                 file_picker = FileSelector2(parent_window,
                     os.path.join(target_path, target), overwrite_confirm=False)
                 file = file_picker.get_filename(
-                    _("Porthole: Please select the %s file to use") %(target),
+                    _("Porthole: Please select the %s file to use") % target,
                     'save')
                 if file == '': return False
                 file = os.path.join(target_path, file)

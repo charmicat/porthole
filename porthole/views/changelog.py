@@ -62,9 +62,9 @@ class ChangeLogView (ListView, MarkupView):
 
     def _get_fn(self, cpv):
         """Returns a path to the specified category/package-version ChangeLog"""
-        dir, file = os.path.split(backends.portage_lib.get_path(cpv))
-        if dir:
-            return os.path.join(dir, "ChangeLog")
+        _dir, file = os.path.split(backends.portage_lib.get_path(cpv))
+        if _dir:
+            return os.path.join(_dir, "ChangeLog")
         return ''
 
     def set_text(self, text):

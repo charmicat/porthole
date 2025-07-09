@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow Action support
     Support class and functions for the mainwindow interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 from gettext import gettext as _
 
@@ -44,7 +44,7 @@ from porthole.mwsupport.category import CategoryHandler
 
 
 class ActionHandler(CategoryHandler):
-    '''Support functions for mainwindow actions'''
+    """Support functions for mainwindow actions"""
 
     def __init__(self):
         CategoryHandler.__init__(self)

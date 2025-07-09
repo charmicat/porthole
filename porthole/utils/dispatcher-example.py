@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 
-'''
+"""
     Porthole dispatcher module
     Holds common debug functions for Porthole
 
@@ -19,7 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 # Fredrik Arnerup <foo@stacken.kth.se>, 2004-12-19
 # Brian Dolbec<dol-sen@telus.net>,2005-3-30
@@ -42,7 +42,7 @@ class Thread(threading.Thread):
 
     def __init__(self, dispatcher, thread_num, length):
         threading.Thread.__init__(self)
-        self.setDaemon(1)  # quit even if this thread is still running
+        self.daemon = True  # quit even if this thread is still running
         self.dispatcher = dispatcher
         self.thread_num = thread_num
         self.sleep_length = length
@@ -57,7 +57,7 @@ class Thread(threading.Thread):
             data = [ self.thread_num, (": time is slipping away: %d\n" %num), num, done]
             self.dispatcher(data) # signal main thread
         done = True
-        data = [ self.thread_num, (": Time slipped away: I'm done"), num, done]
+        data = [self.thread_num, ": Time slipped away: I'm done", num, done]
         self.dispatcher(data) # signal main thread
 
 

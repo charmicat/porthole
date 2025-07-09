@@ -1,25 +1,33 @@
 #!/usr/bin/env python
 
-from distutils.core import setup
+from setuptools import setup, find_packages  # or find_namespace_packages
 from porthole.version import version as p_version
 
 datadir = "share/porthole/"
 
-setup( \
+setup(
     name = "porthole",
-    version = p_version,
+    version='0.0.1',
     description = "GTK+ frontend to Portage",
     author = "Fredrik Arnerup, Daniel G. Taylor, Brian Dolbec, William F. Wheeler",
-    author_email = "dol-sen@users.sourceforge.net, " \
-                    "farnerup@users.sourceforge.net, dgt84@users.sourceforge.net, " \
-                    " tiredoldcoder@users.sourceforge.net",
-    url = "http://porthole.sourceforge.net",
-    packages = ['porthole',  'porthole.advancedemerge', 'porthole.backends', 'porthole.config',
-                        'porthole.db', 'porthole.dialogs', 'porthole.loaders', 'porthole.mwsupport',
-                        'porthole.plugins','porthole.loaders', 'porthole.readers', 'porthole.terminal',
-                        'porthole.utils', 'porthole.views', 'porthole._xml', 'porthole.plugins.etc-proposals',
-                        'porthole.plugins.gpytage',
-                        'porthole.views.packagebook'],
+    author_email = "dol-sen@users.sourceforge.net, "
+                   "farnerup@users.sourceforge.net, dgt84@users.sourceforge.net, "
+                   " tiredoldcoder@users.sourceforge.net",
+    url = "https://porthole.sourceforge.net",
+    build_requires=["requirements","setuptools"],
+
+    install_requires=["requirements","setuptools"],
+    packages=find_packages(
+    # All keyword arguments below are optional:
+        where='.',  # '.' by default
+        include=['porthole*'],  # ['*'] by default
+    ),
+    # packages = ['porthole',  'porthole.advancedemerge', 'porthole.backends', 'porthole.config',
+    #                     'porthole.db', 'porthole.dialogs', 'porthole.loaders', 'porthole.mwsupport',
+    #                     'porthole.plugins','porthole.loaders', 'porthole.readers', 'porthole.terminal',
+    #                     'porthole.utils', 'porthole.views', 'porthole._xml', 'porthole.plugins.etc-proposals',
+    #                     'porthole.plugins.gpytage',
+    #                     'porthole.views.packagebook'],
     package_dir = {'porthole':'porthole'},
     scripts = ["scripts/porthole"],
     data_files = [

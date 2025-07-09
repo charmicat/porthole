@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow Package support class
     Support class and functions for the main interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import gi
 gi.require_version("Gtk", "3.0") # make sure we have the right version

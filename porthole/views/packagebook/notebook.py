@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Main Window
     The main interface the user will interact with
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import gi; gi.require_version("Gtk", "3.0") # make sure we have the right version
 from gi.repository import Gtk
@@ -73,7 +73,7 @@ class PackageNotebook(object):
         self.ebuild_scrolledwindow.show_all()
 
         # summary view
-        scroller = self.wtree.get_object("summary_text_scrolled_window");
+        scroller = self.wtree.get_object("summary_text_scrolled_window")
         self.summary = Summary(Dispatcher(self.callbacks["action_callback"]), self.callbacks["re_init_portage"])
         scroller.add(self.summary)
         self.summary.show()
@@ -156,7 +156,7 @@ class PackageNotebook(object):
             button.connect('clicked', self.save_use_flags_clicked)
             if utils.is_root() or utils.can_gksu():
                 button.show()
-            frame.pack_end(button, expand=False, fill=False, padding=2);
+            frame.pack_end(button, expand=False, fill=False, padding=2)
             frame.show()
             self.use_flag_page.add_with_viewport(frame)
             self.use_flag_page.show()

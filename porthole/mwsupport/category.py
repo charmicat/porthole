@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow Category support
     Support class and functions for the mainwindow interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 from porthole import db
@@ -41,11 +41,11 @@ from porthole.mwsupport.constants import (
 
 
 class CategoryHandler(PackageHandler):
-    '''Support functions for changing categories'''
+    """Support functions for changing categories"""
 
     def __init__(self):
-        '''basic init
-        '''
+        """basic init
+        """
         PackageHandler.__init__(self)
         self.category_view = None
         self.current_cat_name = None
@@ -174,7 +174,7 @@ class CategoryHandler(PackageHandler):
         else:
             cursor = None
             sub_row = False
-        return (cursor, sub_row)
+        return cursor, sub_row
 
     def select_category_package(self, cat, pack):
         """method to re-select the same category and package that
@@ -247,5 +247,5 @@ class CategoryHandler(PackageHandler):
                 catpath = model.get_path(kiditer)
                 break
             kids -= 1
-        return (catpath, kiditer)
+        return catpath, kiditer
 

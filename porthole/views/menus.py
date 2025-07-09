@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Views
     The view menu classes
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import gi; gi.require_version("Gtk", "3.0") # make sure we have the right version
 from gi.repository import Gtk
@@ -40,8 +40,7 @@ class RMBMenu:
         # create popup menu for rmb-click
         arch = "~" + backends.portage_lib.get_arch()
         menu = Gtk.Menu()
-        menuitems = {}
-        menuitems["emerge"] = Gtk.MenuItem(_("Emerge"))
+        menuitems = {"emerge": Gtk.MenuItem(_("Emerge"))}
         menuitems["emerge"].connect("activate", self.emerge)
         menuitems["pretend-emerge"] = Gtk.MenuItem(_("Pretend Emerge"))
         menuitems["pretend-emerge"].connect("activate", self.emerge, True, None)

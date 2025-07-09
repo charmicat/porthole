@@ -27,7 +27,7 @@ import os
 from gettext import gettext as _
 
 #from timeit import Timer
-import imp
+import importlib
 
 try:
     import pkgcore
@@ -594,7 +594,7 @@ def get_size(ebuild):
         myfile.close()
         mystr = str(mysum/1024)
         mycount=len(mystr)
-        while (mycount > 3):
+        while mycount > 3:
             mycount-=3
             mystr=mystr[:mycount]+","+mystr[mycount:]
         mysum=mystr+" kB"
@@ -919,9 +919,9 @@ class Database:
         #category, name = fullname.split("/")
         category = get_category(full_name)
         name = get_name(full_name)
-        if (category in self.categories and name in self.categories[category]):
+        if category in self.categories and name in self.categories[category]:
             self.categories[category][name].update_info()
-        if (category in self.installed and name in self.installed[category]):
+        if category in self.installed and name in self.installed[category]:
             self.installed[category][name].update_info()
 
 
@@ -930,7 +930,7 @@ class DatabaseReader(threading.Thread):
 
     def __init__(self, callback):
         threading.Thread.__init__(self)
-        self.setDaemon(1)     # quit even if this thread is still running
+        self.daemon = True     # quit even if this thread is still running
         self.db = Database()        # the database
         self.callback = callback
         self.done = False     # false if the thread is still working
@@ -986,7 +986,7 @@ class DatabaseReader(threading.Thread):
                         self.db.categories[category] = {}
                         self.db.pkg_count[category] = 0
                         #dprint("added category %s" % str(category))
-                    self.db.categories[category][name] = data;
+                    self.db.categories[category][name] = data
                     self.db.pkg_count[category] += 1
                     if entry in self.installed_list:
                         if category not in self.db.installed:

@@ -23,11 +23,13 @@ from porthole.views.lazyview import LazyView
 
 class HighlightView (GtkSource.View, LazyView):
 
-    def __init__ (self, get_file_fn, languages = []):
+    def __init__ (self, get_file_fn, languages=None):
         """@param get_file_fn: function to return a filename from a pkg object
             @param get_file_fn: if None, then it will use pkg as the filename to show
             @param languages: list of languages to use for highlighting eg. ['gentoo', 'shell']
         """
+        if languages is None:
+            languages = []
         if get_file_fn:
             self.get_fn = get_file_fn
         else:  # assume it is passed a filename already

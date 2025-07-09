@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Summary Class
     Loads package info into a textview and makes it pretty
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import gi; gi.require_version("Gtk", "3.0") # make sure we have the right version
 from gi.repository import Gdk
@@ -86,8 +86,7 @@ class Summary(Gtk.TextView):
         self.connect("button_press_event", self.on_button_press)
 
     def createmenu(self):
-        menuitems = {}
-        menuitems["emerge"] = Gtk.MenuItem(_("Emerge this ebuild"))
+        menuitems = {"emerge": Gtk.MenuItem(_("Emerge this ebuild"))}
         menuitems["emerge"].connect("activate", self.emerge)
         menuitems["pretend-emerge"] = Gtk.MenuItem(_("Pretend Emerge this ebuild"))
         menuitems["pretend-emerge"].connect("activate", self.emerge, True, None)

@@ -285,10 +285,10 @@ class TerminalNotebook:
     def set_scroll(self,  vadjustment):
         """Sets autoscrolling on when moved to bottom of scrollbar"""
         #debug.dprint("NOTEBOOK: set_scroll() -- vadjustment")
-        self.auto_scroll[self.current_tab] = ((vadjustment.get_upper() - \
-                                                        vadjustment.get_value()) - \
-                                                        vadjustment.get_page_size() < \
-                                                         (SLIDER_CLOSE_ENOUGH * vadjustment.get_page_size()))
+        self.auto_scroll[self.current_tab] = ((vadjustment.get_upper() -
+                                               vadjustment.get_value()) -
+                                              vadjustment.get_page_size() <
+                                              (SLIDER_CLOSE_ENOUGH * vadjustment.get_page_size()))
         return
 
     def switch_page(self, notebook, page, page_num):
@@ -329,7 +329,7 @@ class TerminalNotebook:
                     tag_table.remove(foundtag)
                 self.view_buffer[process_tab].create_tag(key, **argdict)
         # shell format codes. Values defined with other tags in prefs.
-        self.esc_seq_dict = { \
+        self.esc_seq_dict = {
             0  : 'default',
             1  : 'bold',
             2  : 'light',
@@ -481,5 +481,5 @@ class TerminalNotebook:
             self.view_buffer[TAB_PROCESS].move_mark_by_name("command_start",start_iter)
         else:
             # create the mark
-            self.command_start = self.view_buffer[TAB_PROCESS].create_mark( \
+            self.command_start = self.view_buffer[TAB_PROCESS].create_mark(
                 "command_start",start_iter, True)

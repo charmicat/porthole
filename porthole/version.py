@@ -64,6 +64,7 @@ def get_version():
     if 'git' in version:
         rev = get_git_info('commit')
         login = os.getenv("LOGNAME")
+        # version = version + get_git_info('branch') + "-rev:" + rev + "--"+login
         version = version + get_git_info('branch') + "-rev:" + rev + "--"+login
     return version
 

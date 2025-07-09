@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Depends TreeModel
     Calculates and stores package dependency information
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 from gi.repository import GdkPixbuf
 from gi.repository import GObject
@@ -216,7 +216,7 @@ class DependsTree(Gtk.TreeStore):
                 dep_depth=dep_depth)
         else:
             debug.dprint("DependsTree: _add_kids(): Failed to get dep_ebuild for " +
-                "atom=%s" %(atom.atom))
+                "atom=%s" % atom.atom)
         return
 
 
@@ -241,7 +241,7 @@ class DependsTree(Gtk.TreeStore):
             #    add_kids, ebuild=dep_ebuild, is_new_child=True, depth=depth+1)
         else:
             debug.dprint("DependsTree: _add_lazy(): Failed to get dep_ebuild for " +
-                "atom=%s" %(atom.atom))
+                "atom=%s" % atom.atom)
         return
 
 

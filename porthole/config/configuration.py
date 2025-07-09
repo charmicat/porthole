@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Utils Package
     Holds common functions for Porthole
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 _id = datetime.datetime.now().microsecond
@@ -65,8 +65,8 @@ class PortholeConfiguration(object):
         del dom
 
     def isInfo(self, teststring):
-        ''' Parse string, return true if it matches info
-            reg exp and its not in the reg exp notlist'''
+        """ Parse string, return true if it matches info
+            reg exp and its not in the reg exp notlist"""
         result = False
         go1 = True
         for regexp in self.info_re_list:
@@ -84,7 +84,7 @@ class PortholeConfiguration(object):
         return result
 
     def isWarning(self, teststring):
-        ''' Parse string, return true if it matches warning reg exp '''
+        """ Parse string, return true if it matches warning reg exp """
         result = False
         go1 = True
         for regexp in self.warning_re_list:
@@ -102,7 +102,7 @@ class PortholeConfiguration(object):
         return result
 
     def isCaution(self, teststring):
-        ''' Parse string, return true if matches caution regexp '''
+        """ Parse string, return true if matches caution regexp """
         result = False
         go1 = True
         for regexp in self.caution_re_list:
@@ -120,7 +120,7 @@ class PortholeConfiguration(object):
         return result
 
     def isError(self, teststring):
-        ''' Parse string, return true if belongs in error tab '''
+        """ Parse string, return true if belongs in error tab """
         result = False
         go1 = True
         for regexp in self.error_re_list:
@@ -138,17 +138,17 @@ class PortholeConfiguration(object):
         return result
 
     def isEmerge(self, teststring):
-        ''' Parse string, return true if it is the initial emerge line '''
+        """ Parse string, return true if it is the initial emerge line """
         return self.emerge_re.match(teststring) != None
 
     def isMerged(self, teststring):
-        ''' Parse string, return true if it is the merged line '''
+        """ Parse string, return true if it is the merged line """
         return self.merged_re.search(teststring) != None
     def isAction(self, teststring):
-        '''
+        """
         Returns True if teststring matches the pre-set criteria for notification of an
         action the user is recommended to take, such as etc-update or revdep-rebuild.
-        '''
+        """
         result = False
         go1 = True
         for regexp in self.needaction_re_list:
@@ -166,7 +166,7 @@ class PortholeConfiguration(object):
         return result
 
     def isBadPassword(self, teststring):
-        ''' Parse string, return true if belongs in error tab '''
+        """ Parse string, return true if belongs in error tab """
         result = False
         for regexp in self.badpassword_re_list:
             #print "isBadPassword checking for: ", regexp.pattern

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow statusbar support
     Support class and functions for the mainwindow interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 from gi.repository import Gtk
@@ -35,7 +35,7 @@ from porthole.mwsupport.action import ActionHandler
 
 
 class PluginHandler(ActionHandler):
-    '''Support functions for plugins'''
+    """Support functions for plugins"""
 
     def __init__(self):
         """basic init"""
@@ -95,7 +95,7 @@ class PluginHandler(ActionHandler):
         """adds a view menu option to the mainwindow"""
         self.widget["view_filter_list"].append([name])
         self.plugin_views[name] = callbacks
-        return (self.category_view, self.package_view, self.packagebook)
+        return self.category_view, self.package_view, self.packagebook
 
     def del_plugin_view( self, name ):
         """removes a view menu option from the mainwindow"""

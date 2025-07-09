@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow statusbar support
     Support class and functions for the mainwindow interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 from gettext import gettext as _
@@ -40,7 +40,7 @@ from porthole.mwsupport.constants import (
 
 
 class StatusHandler(object):
-    '''Support functions for maintaining the status/progreess bar'''
+    """Support functions for maintaining the status/progreess bar"""
 
     def __init__(self,  statusbar,
                         progressbar,

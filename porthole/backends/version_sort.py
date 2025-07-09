@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole's Version string list sorting functions that follows portages
     rules for comparing versions.  The pad_ver() is modified from
     the soon to be implemented portage.vercmp()
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 _id = datetime.datetime.now().microsecond
@@ -171,7 +171,7 @@ def ver_sort(versions):
     keylist = pad_ver(get_versions_only(versions))
     if not keylist: # there was an error
         dprint("VERSION_SORT: ver_sort(); keylist[] creation error")
-        return (versions + ["error_in_sort"])
+        return versions + ["error_in_sort"]
     sorted = two_list_sort(keylist, versions)
     #dprint("VERSION_SORT: ver_sort(); complete!")
     return sorted
@@ -204,7 +204,7 @@ def ver_match(versions, range1, range2 = None):
     match1 = False
     match2 = False
     for x in plist:
-        if (x >= r1[0] and x <= r1[1]):
+        if x >= r1[0] and x <= r1[1]:
             dprint("VERSION_SORT: ver_match(); match1 %s, %s:%s" %(x,r1[0],r1[1]))
             match1 = True
         if range2 and (x >= r2[0] and x <= r2[1]):

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Advanced Emerge Dialog
     Allows the user to set options, use flags, keywords and select
     specific versions.  Has lots of tool tips, too.
@@ -21,5 +21,5 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Utils Package
     Holds common functions for Porthole
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 _id = datetime.datetime.now().microsecond
@@ -105,9 +105,7 @@ class PortholePreferences:
         # of the prefs files are still compatible and even if the user has
         # no prefs file, it still works!
 
-        preflist = {}
-
-        preflist['main'] = [ \
+        preflist = {'main': [
             ['width', 200],
             ['height', 350],
             ['xpos', False],
@@ -117,21 +115,17 @@ class PortholePreferences:
             ['maximized', False],
             ['search_desc', False],
             ['show_nag_dialog', True]
-        ]
-
-        preflist['process'] = [ \
+        ], 'process': [
             ['width', 300],
             ['height', 350],
             ['width_verbose', 500]
-        ]
-
-        preflist['terminal'] = [ \
+        ], 'terminal': [
             ['width', 300],
             ['height', 350],
             ['width_verbose', 500],
             ['all_tabs_use_custom_colors', False],
             ['font', None]
-        ]
+        ]}
 
         history = ["",
                    "emerge ",
@@ -143,7 +137,7 @@ class PortholePreferences:
         # at the start of the popdown history list & set above when history is set
         # history_length = Default value for maximum nuber of retained history items
 
-        preflist['run_dialog'] = [ \
+        preflist['run_dialog'] = [
             ['width', 400],
             ['height', 120],
             ['history', history],
@@ -169,7 +163,7 @@ class PortholePreferences:
 
         self.TAG_DICT = {}
 
-        taglist = [ \
+        taglist = [
             ['default','','',400],
             ['caution','','#c040b0',400],  # [name, default forecolor, backcolor, fontweight]
             ['command','#ffffff','#000080',700],
@@ -236,7 +230,7 @@ class PortholePreferences:
                 value = default
             setattr(self.advemerge, option, value)
 
-        viewoptions = [ \
+        viewoptions = [
             ['downgradable_fg', '#FA0000'],
             ['upgradable_fg', '#0000FF'],
             ['normal_fg','#000000'],
@@ -250,7 +244,7 @@ class PortholePreferences:
                 value = default
             setattr(self.views, option, value)
 
-        summaryoptions = [ \
+        summaryoptions = [
             ['showtable', True],
             ['showkeywords', True],
             ['showinstalled', True],
@@ -289,7 +283,7 @@ class PortholePreferences:
 
         self.plugins = OptionsClass()
 
-        globaloptions = [ \
+        globaloptions = [
             ['LANG', 'en'],
             ['enable_archlist', False],
             ##['enable_all_keywords', False],
@@ -399,8 +393,8 @@ class PortholePreferences:
         dom.additem('/window/terminal/height', self.terminal.height)
         dom.additem('/window/terminal/width_verbose', self.terminal.width_verbose)
         dom.additem('/window/terminal/font', self.terminal.font)
-        dom.additem('/window/terminal/all_tabs_use_custom_colors', \
-            self.terminal.all_tabs_use_custom_colors)
+        dom.additem('/window/terminal/all_tabs_use_custom_colors',
+                    self.terminal.all_tabs_use_custom_colors)
         # generate tag keys from dictionary
         for key in self.TAG_DICT:
             format_list = self.TAG_DICT[key]

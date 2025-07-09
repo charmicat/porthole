@@ -239,7 +239,7 @@ class TerminalQueue:
             if package_name == self.get_name() and command_string == self.get_command():
                 debug.dprint("TERM_QUEUE: add(): showing resume dialog")
                 # The process has been killed, so help the user out a bit
-                message = _("The package you selected is already in the emerge queue,\n" \
+                message = _("The package you selected is already in the emerge queue,\n"
                             "but it has been killed. Would you like to resume the emerge?")
                 result = self.resume_dialog(message)
                 if result == Gtk.ResponseType.ACCEPT: # Execute
@@ -558,8 +558,8 @@ class TerminalQueue:
         try:
             path = self.queue_model.get_path(selected_iter)[0]
         except:
-            debug.dprint("TERM_QUEUE: Couldn't get queue view treeiter path, " \
-                    "there is probably nothing selected.")
+            debug.dprint("TERM_QUEUE: Couldn't get queue view treeiter path, "
+                         "there is probably nothing selected.")
             del selected_iter
             return False
         # if the item is already run
@@ -822,7 +822,7 @@ class TerminalQueue:
         window = self.wtree.get_object("process_window")
         _dialog = Gtk.MessageDialog(window, Gtk.DialogFlags.MODAL,
                                     Gtk.MessageType.QUESTION,
-                                    Gtk.ButtonsType.CANCEL, message);
+                                    Gtk.ButtonsType.CANCEL, message)
         _dialog.add_button(Gtk.STOCK_EXECUTE, Gtk.ResponseType.ACCEPT)
         _dialog.add_button("Resume", Gtk.ResponseType.YES)
         result = _dialog.run()

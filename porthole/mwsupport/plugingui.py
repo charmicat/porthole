@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Plugin Interface
     Imports and interacts with plugins
 
@@ -19,14 +19,14 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 id = datetime.datetime.now().microsecond
 print("PLUGIN: id initialized to ", id)
 
 from gi.repository import Gtk
-#import imp
+from gi.repository import Gdk
 from gettext import gettext as _
 
 #from porthole.utils import utils

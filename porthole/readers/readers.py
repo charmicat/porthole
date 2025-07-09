@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Reader Classes
     The main interface the user will interact with
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 ## DEPRICATED MODULE
@@ -44,8 +44,8 @@ class ToolChain:
         self.build = build
         self.tc_conf = ""
         self.tc_stdc = ""
-        self.TC_build = ["sys-kernel/linux-headers", "sys-libs/glibc", self.tc_conf, \
-                      "sys-devel/binutils", "sys-devel/gcc", self.tc_stdc]
+        self.TC_build = ["sys-kernel/linux-headers", "sys-libs/glibc", self.tc_conf,
+                         "sys-devel/binutils", "sys-devel/gcc", self.tc_stdc]
         self.TC="linux-headers glibc $tc_conf_regx binutils-[0-9].* gcc-[0-9].* glibc binutils-[0-9].* gcc-[0-9].* $tc_stdc"
         self.TC_glb="glibc $tc_conf_regx binutils-[0-9].* gcc-[0-9].* glibc binutils-[0-9].* gcc-[0-9].* $tc_stdc"
         self.TCmini="$tc_conf_regx binutils-[0-9].* gcc-[0-9].* binutils-[0-9].* gcc-[0-9].* $tc_stdc"
@@ -66,7 +66,7 @@ class CommonReader(threading.Thread):
         # cancelled will be set when the thread should stop
         self.cancelled = False
         # quit even if thread is still running
-        self.setDaemon(1)
+        self.daemon = True
 
     def please_die( self ):
         """ Tell the thread to die """

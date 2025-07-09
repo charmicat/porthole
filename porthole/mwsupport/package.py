@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Mainwindow Package support class
     Support class and functions for the main interface
 
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 from gettext import gettext as _
 
@@ -43,10 +43,10 @@ from porthole.mwsupport.constants import (
 
 
 class PackageHandler(MainBase):
-    '''Support functions for the maindow interface'''
+    """Support functions for the maindow interface"""
 
     def __init__(self):
-        '''basic init'''
+        """basic init"""
         MainBase.__init__(self)
         self.packagebook = None
         self.current_pkg_name = None
@@ -228,7 +228,7 @@ class PackageHandler(MainBase):
                 options = config.Prefs.emerge.get_string()
                 # handle --unmerge as exact cat/pkg-ver?
                 if action in ["emerge --unmerge "]:
-                    opts = set(['--pretend', '--depclean']).intesection(
+                    opts = {'--pretend', '--depclean'}.intesection(
                         set(options.split()))
                     options = ' '.join(opts)
                     #

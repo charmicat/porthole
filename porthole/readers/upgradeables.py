@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Reader Class: Upgradable List Reader
 
     Copyright (C) 2003 - 2008 Fredrik Arnerup, Brian Dolbec,
@@ -19,7 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import os
 import time
@@ -69,7 +69,7 @@ class UpgradableListReader(CommonReader):
         """fill upgrade tree"""
         debug.dprint("READERS: UpgradableListReader(); process id = %d *******************" %os.getpid())
         print("READERS: UpgradableListReader(); threading.enumerate() = ",threading.enumerate(), file=stderr)
-        print("READERS: UpgradableListReader(); this thread is :", _thread.get_ident(), ' current thread ', threading.currentThread(), file=stderr)
+        print("READERS: UpgradableListReader(); this thread is :", _thread.get_ident(), ' current thread ', threading.current_thread(), file=stderr)
         self.get_system_list()
         self.get_sets()
         for key in self.cat_order:

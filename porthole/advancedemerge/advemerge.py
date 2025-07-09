@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Advanced Emerge Dialog
     Allows the user to set options, use flags, keywords and select
     specific versions.  Has lots of tool tips, too.
@@ -21,7 +21,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import datetime
 _id = datetime.datetime.now().microsecond
@@ -183,14 +183,14 @@ class AdvancedEmergeDialog:
 
         # emerge / unmerge combobox:
         self.emerge_combolist = Gtk.ListStore(str)
-        iter = self.emerge_combolist.append(["emerge"])
+        _iter = self.emerge_combolist.append(["emerge"])
         self.emerge_combolist.append(["unmerge"])
         self.emerge_combobox = self.wtree.get_object("cmbEmerge")
         self.emerge_combobox.set_model(self.emerge_combolist)
         cell = Gtk.CellRendererText()
         self.emerge_combobox.pack_start(cell, True)
         self.emerge_combobox.add_attribute(cell, 'text', 0)
-        self.emerge_combobox.set_active_iter(iter)
+        self.emerge_combobox.set_active_iter(_iter)
 
         # Set any emerge options the user wants defaulted
         if config.Prefs.emerge.pretend:
@@ -235,9 +235,9 @@ class AdvancedEmergeDialog:
     def version_changed(self, widget):
         """ Version has changed, update the dialog window """
         debug.dprint("ADVEMERGE: changing version")
-        iter = self.combobox.get_active_iter()
+        _iter = self.combobox.get_active_iter()
         model = self.combobox.get_model()
-        sel_ver = model.get_value(iter, 0)
+        sel_ver = model.get_value(_iter, 0)
         if len(sel_ver) > 2:
             verInfo = self.current_verInfo = self.get_verInfo(sel_ver)
             # Reset use flags
@@ -249,9 +249,9 @@ class AdvancedEmergeDialog:
     def emerge_changed(self, widget):
         """ Swap between emerge and unmerge """
         debug.dprint("ADVEMERGE: emerge_changed()")
-        iter = self.emerge_combobox.get_active_iter()
+        _iter = self.emerge_combobox.get_active_iter()
         model = self.emerge_combobox.get_model()
-        self.emerge_unmerge = model.get_value(iter, 0)
+        self.emerge_unmerge = model.get_value(_iter, 0)
         self.display_emerge_command()
 
     def set_all(self, widget, *args):
@@ -302,8 +302,8 @@ class AdvancedEmergeDialog:
                 removelist.append('-' + item)
         # set_user_config must be performed after set_make_conf has finished or we get problems.
         # we need to set package.use in case the flag was set there originally!
-        package_use_callback = Dispatcher( db.userconfigs.set_user_config,\
-                'USE', self.package.full_name, '', '', removelist, self.reload )
+        package_use_callback = Dispatcher( db.userconfigs.set_user_config,
+                                           'USE', self.package.full_name, '', '', removelist, self.reload )
         backends.portage_lib.set_make_conf('USE', add=addlist, remove=removelist, callback=package_use_callback )
         self.version_changed(button_widget)
 
@@ -518,9 +518,9 @@ class AdvancedEmergeDialog:
 
     def get_command(self):
         # Get selected version from combo list
-        iter = self.combobox.get_active_iter()
+        _iter = self.combobox.get_active_iter()
         model = self.combobox.get_model()
-        sel_ver = model.get_value(iter, 0)
+        sel_ver = model.get_value(_iter, 0)
 
         # Get version info of selected version
         verInfo = self.get_verInfo(sel_ver)
@@ -544,7 +544,7 @@ class AdvancedEmergeDialog:
             self.btnPkgKeywords.set_sensitive(False)
 
         # Build emerge or unmerge base command
-        if (self.is_root or self.wtree.get_object("cbPretend").get_active()):
+        if self.is_root or self.wtree.get_object("cbPretend").get_active():
             emerge_unmerge = ''
         else:
             emerge_unmerge = 'sudo -p "Password: " '
@@ -555,7 +555,7 @@ class AdvancedEmergeDialog:
             emerge_unmerge += "emerge --unmerge "
 
         # Send command to be processed
-        command = ''.join([ \
+        command = ''.join([
             use_flags,
             # accept_keyword, # this sole 'feature' has caused so many times emerging unstable code.
             emerge_unmerge,

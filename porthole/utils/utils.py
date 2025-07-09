@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Utils Module
     Holds common functions for Porthole
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 import os
@@ -228,10 +228,10 @@ def pretend_check(command_string):
     return isPretend
 
 def help_check(command_string):
-    return (re.search("--help", command_string) != None)
+    return re.search("--help", command_string) != None
 
 def info_check(command_string):
-    return (re.search("emerge info", command_string) != None)
+    return re.search("emerge info", command_string) != None
 
 def get_set_name(file):
         if file:

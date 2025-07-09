@@ -191,14 +191,14 @@ def slot_split(mydep):
     colon = mydep.rfind(":")
     if colon != -1:
         return [mydep[:colon], mydep[colon+1:]]
-    return (mydep, '')
+    return mydep, ''
 
 def use_required_split(mydep):
     brace = mydep.find("[")
     if brace != -1:
         brace2 = mydep.rfind("]")
         return [mydep[:brace], mydep[brace+1:brace2]]
-    return (mydep, '')
+    return mydep, ''
 
 comparators = ["~","<",">","=","<=",">="]
 def comparators_split(mydep):
@@ -211,7 +211,7 @@ def comparators_split(mydep):
             if mydep.startswith(c):
                 cmp = c
         mydep = mydep[len(cmp):]
-    return (mydep, cmp)
+    return mydep, cmp
 
 def dep_split(mydep):
     if mydep == '':
@@ -219,7 +219,7 @@ def dep_split(mydep):
     mydep, use = use_required_split(mydep)
     mydep, slot = slot_split(mydep)
     mydep, cmp = comparators_split(mydep)
-    return (mydep, cmp, slot, use)
+    return mydep, cmp, slot, use
 
 def filter_flags(myuse, use_expand_hidden, usemasked, useforced):
     # clean out some environment flags, since they will most probably be confusing for the user

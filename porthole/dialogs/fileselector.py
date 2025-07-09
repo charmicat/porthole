@@ -88,7 +88,7 @@ class FileSelector:
                 err = _("Ovewrite existing file '%s'?")  % filename
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                             Gtk.MessageType.QUESTION,
-                                            Gtk.ButtonsType.YES_NO, err);
+                                            Gtk.ButtonsType.YES_NO, err)
                 result = dialog.run()
                 dialog.destroy()
                 if result != Gtk.ResponseType.YES:

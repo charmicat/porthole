@@ -71,8 +71,8 @@ def Header(filename, username):
             dprint("SET_CONFIG: Header(); new header failure: loop # " + str(loops))
             loops += 1
             #time.sleep(.5)
-    header = ("# $Header: %s created by Porthole's set_config.py v: %s, %s, %s Exp $\n" \
-                %(filename, str(version), dt, username))
+    header = ("# $Header: %s created by Porthole's set_config.py v: %s, %s, %s Exp $\n"
+              %(filename, str(version), dt, username))
 
     header = "#########################################################################\n" + header
 
@@ -117,8 +117,7 @@ def group_by_blanklines(configlines):
         input: list of text lines
         returns a tuple of lists"""
     x=0
-    groups={}
-    groups[x]=[]
+    groups= {x: []}
     for s in configlines:
         groups[x].append(s)
         if s == '\n':
@@ -149,7 +148,7 @@ def remove_flag(flag, line):
     return line
 
 def set_user_config(filename, name='', ebuild='', comment = '',
-    username='', add=[], remove=[], delete=[]):
+                    username='', add=None, remove=None, delete=None):
     """
     Adds <name> or '=' + <ebuild> to <filename> with flags <add>.
     If an existing entry is found, items in <remove> are removed
@@ -159,6 +158,12 @@ def set_user_config(filename, name='', ebuild='', comment = '',
     something in remove are removed, and items in <add> are added
     as new lines.
     """
+    if delete is None:
+        delete = []
+    if remove is None:
+        remove = []
+    if add is None:
+        add = []
     dprint("SET_CONFIG: set_user_config(): filename = '%s'" % filename)
     dprint("SET_CONFIG: set_user_config(): add=%s, remove=%s, delete=%s"
         %(str(add), str(remove), str(delete)))
@@ -235,8 +240,12 @@ def set_user_config(filename, name='', ebuild='', comment = '',
     configfile.close()
     return True
 
-def set_package_mask(filename, name='', ebuild='', comment='', username='', add=[], remove=[]):
+def set_package_mask(filename, name='', ebuild='', comment='', username='', add=None, remove=None):
     """routine to handle adding/removing entries in package.mask files which should have multple lines to add/delete"""
+    if remove is None:
+        remove = []
+    if add is None:
+        add = []
     dprint("SET_CONFIG:  set_package_mask(): filename = '%s'" % filename)
     if not chk_permission(filename):
         return False
@@ -253,7 +262,7 @@ def set_package_mask(filename, name='', ebuild='', comment='', username='', add=
     configfile.close()
     return True
 
-def set_make_conf(_property, add=[], remove=[], replace=''):
+def set_make_conf(_property, add=None, remove=None, replace=''):
     """
     Sets a variable in make.conf.
     If remove: removes elements of <remove> from variable string.
@@ -266,6 +275,10 @@ def set_make_conf(_property, add=[], remove=[], replace=''):
     e.g. set_make_conf('ACCEPT_KEYWORDS', remove='ACCEPT_KEYWORDS')
     e.g. set_make_conf('PORTAGE_NICENESS', replace='15')
     """
+    if remove is None:
+        remove = []
+    if add is None:
+        add = []
     dprint("SET_CONFIG: set_make_conf()")
     try:
         filename = os.path.join(portage.root, portage_const.MAKE_CONF_FILE)
@@ -334,22 +347,22 @@ class MakeConf:
         """creates the property reg expression and saves it to
         the regex dictionary for use"""
         if not _property in self.regex:
-            self.regex[_property] = re.compile(('%s\s*=\s*"([^"]*)"') %_property)
+            self.regex[_property] = re.compile('%s\s*=\s*"([^"]*)"' % _property)
 
     def add_overlay(self, overlay):
-        '''Add an overlay to make.conf.'''
+        """Add an overlay to make.conf."""
         self.overlays.append(overlay)
         self.write_overlay()
 
     def delete_overlay(self, overlay):
-        '''Delete an overlay from make.conf.'''
+        """Delete an overlay from make.conf."""
         self.overlays = [i
                          for i in self.overlays
                          if i.name != overlay.name]
         self.write_overlay()
 
     def read_overlay(self):
-        '''Read the list of registered overlays from /etc/make.conf.'''
+        """Read the list of registered overlays from /etc/make.conf."""
         if self.data == '':
             self.content()
         if self.data > '':
@@ -379,7 +392,7 @@ class MakeConf:
         return self.overlays + self.extra
 
     def read_property(self, _property):
-        '''Read the list of USE flags from /etc/make.conf.'''
+        """Read the list of USE flags from /etc/make.conf."""
         if self.data == '':
             self.content()
         if _property not in self.regex:
@@ -401,9 +414,9 @@ class MakeConf:
         return values
 
     def write_overlay(self):
-        '''  Write the list of registered overlays to /etc/make.conf.'''
+        """  Write the list of registered overlays to /etc/make.conf."""
         def prio_sort(a, b):
-            '''Sort by priority.'''
+            """Sort by priority."""
             if a.priority < b.priority:
                 return -1
             elif a.priority > b.priority:
@@ -442,7 +455,7 @@ class MakeConf:
         return True
 
     def write_property(self, _property, values):
-        '''  Write the list of property values to /etc/make.conf.'''
+        """  Write the list of property values to /etc/make.conf."""
         #dprint("SET_CONFIG: MakeConf write_property \n%s' %s = %s" % (_property, len(values), values))
         new = _property +'="'
         line = ''
@@ -462,7 +475,7 @@ class MakeConf:
         return True
 
     def content(self):
-        '''Returns the content of the /etc/make.conf file.'''
+        """Returns the content of the /etc/make.conf file."""
         if os.path.isfile(self.path):
             try:
                 make_conf = codecs.open(self.path, 'r', 'utf-8')
@@ -547,31 +560,31 @@ if __name__ == "__main__":
         elif opt in ('-d', "--debug"):
             debug = True
             dprint("Debug printing is enabled")
-        elif opt in ('-f'):
+        elif opt in '-f':
             filename = arg
             dprint("file = %s" %_file)
-        elif opt in ('-n'):
+        elif opt in '-n':
             name = arg
             dprint("name = %s" %name)
-        elif opt in ('-e'):
+        elif opt in '-e':
             ebuild = arg
             dprint("ebuild = %s" %ebuild)
-        elif opt in ('-a'):
+        elif opt in '-a':
             add.append(arg)
             dprint("add list = %s" % str(add))
-        elif opt in ('-r'):
+        elif opt in '-r':
             remove.append(arg)
             dprint("remove = %s" % str(remove))
-        elif opt in ('-p'):
+        elif opt in '-p':
             _property = arg
             dprint("property = %s" % str(_property))
-        elif opt in ('-R'):
+        elif opt in '-R':
             replace = arg
             dprint("replace = %s" % str(replace))
-        elif opt in ('-c'):
+        elif opt in '-c':
             comment = arg
             dprint("comment = %s" % str(comment))
-        elif opt in ('-u'):
+        elif opt in '-u':
             username = arg
             dprint("username = %s" % str(username))
 

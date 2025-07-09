@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole loader functions
     The main interface the user will interact with
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import os
 import threading
@@ -164,7 +164,7 @@ def load_installed_files(window, view, package = None, ebuild = None):
                 view.set_text(_("Not installed"))
         else:
             debug.dprint("LOADERS: No package sent to load_installed_files!")
-            view.set_text(_("No data currently available.\n" \
+            view.set_text(_("No data currently available.\n"
                             "The package may not be installed"))
             return
         d= {"installed_count" : len(installed_files), "ebuild" : ebuild}
@@ -203,7 +203,7 @@ class web_page(threading.Thread):
         debug.dprint("LOADERS: web_page.__init__()")
         threading.Thread.__init__(self)
         self.name = name
-        self.setDaemon(1)  # quit even if this thread is still running
+        self.daemon = True  # quit even if this thread is still running
 
     def run(self):
         debug.dprint("LOADERS: web_page.run()")

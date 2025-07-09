@@ -80,7 +80,7 @@ class Database(DBBase):
             #debug.dprint("Database: get_package(); fullname = " + full_name)
             category = backends.portage_lib.get_category(full_name)
             name = backends.portage_lib.get_name(full_name)
-            if (category in self.categories and name in self.categories[category]):
+            if category in self.categories and name in self.categories[category]:
                 return self.categories[category][name]
             else:
                 if category != 'virtual':
@@ -96,9 +96,9 @@ class Database(DBBase):
         #category, name = fullname.split("/")
         category = backends.portage_lib.get_category(fullname)
         name = backends.portage_lib.get_name(fullname)
-        if (category in self.categories and name in self.categories[category]):
+        if category in self.categories and name in self.categories[category]:
             self.categories[category][name].update_info()
-        if (category in self.installed and name in self.installed[category]):
+        if category in self.installed and name in self.installed[category]:
             self.installed[category][name].update_info()
 
     def update(self, pkg):
@@ -223,10 +223,8 @@ class Database(DBBase):
         """ Update status of description loading process """
         if self.desc_callback:
             # gather  the callback data
-            args = {}
-            args['cancelled'] = self.desc_thread.cancelled
-            args['done'] = self.desc_thread.done
-            args['count'] = self.desc_thread.count
+            args = {'cancelled': self.desc_thread.cancelled, 'done': self.desc_thread.done,
+                    'count': self.desc_thread.count}
         if self.desc_thread.done:
             # grab the db
             self.descriptions = self.desc_thread.descriptions

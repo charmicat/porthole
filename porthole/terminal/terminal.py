@@ -107,8 +107,10 @@ from porthole import config
 
 class ProcessManager: #dbus.service.Object):
     """ Manages queued and running processes """
-    def __init__(self, env = {}, log_mode = False):
+    def __init__(self, env=None, log_mode = False):
         """ Initialize """
+        if env is None:
+            env = {}
         debug.dprint("TERMINAL: ProcessManager; process id = %d ****************" %os.getpid())
 
         #self.sysbus = dbus.SystemBus()
@@ -324,7 +326,7 @@ class ProcessManager: #dbus.service.Object):
 
         self.process_queue.add(name, command, callback, sender)
 
-    def reply():
+    def reply(self):
         pass
 
     def on_size_request(self, window, gbox):
@@ -525,7 +527,7 @@ class ProcessManager: #dbus.service.Object):
             err = _("Confirm: Kill the Running Process")
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                     Gtk.MessageType.QUESTION,
-                                    Gtk.ButtonsType.YES_NO, err);
+                                    Gtk.ButtonsType.YES_NO, err)
             result = dialog.run()
             dialog.destroy()
             if result != Gtk.ResponseType.YES:
@@ -693,7 +695,7 @@ class ProcessManager: #dbus.service.Object):
                 if self.cr_flag:
                     # gcc and some emerge output no longer outputs a LF so addded a bypass switch
                     # no, seems gcc is sending 2 <cr>'s before a LF
-                    if (self.LF_check and ord_char != 10): # or ord(self.lastchar) == 13:
+                    if self.LF_check and ord_char != 10: # or ord(self.lastchar) == 13:
                         #debug.dprint("TERMINAL: self.LF_check = True and the next char != 10, but = %d, self.cr_count = %d, self.lastchar = %d" %(ord_char, self.cr_count,ord(self.lastchar)))
                         tag = None
                         if self.first_cr:
@@ -825,7 +827,7 @@ class ProcessManager: #dbus.service.Object):
         dialog = Gtk.Dialog("Password Required",
                             self.window,
                             Gtk.DialogFlags.MODAL & Gtk.DialogFlags.DESTROY_WITH_PARENT,
-                            (_("_Cancel"), Gtk.ResponseType.CANCEL));
+                            (_("_Cancel"), Gtk.ResponseType.CANCEL))
         dialog.vbox.set_spacing(10)
         #dialog.set_has_separator(False)
         dialog.set_border_width(10)
@@ -1067,25 +1069,25 @@ class ProcessManager: #dbus.service.Object):
                     total += curr_estimate
                 else:
                     self.term.append(TAB_PROCESS, _(
-                            "*** Unfortunately, you don't have enough " \
-                            "logged information about the listed packages " \
-                            "to calculate estimated build times " \
+                            "*** Unfortunately, you don't have enough "
+                            "logged information about the listed packages "
+                            "to calculate estimated build times "
                             "accurately.\n"), 'note')
                     return None
             self.term.append(TAB_PROCESS, _(
-                        "*** Based on the build history of these packages " \
-                        "on your system, I can estimate that emerging them " \
-                        "usually takes, on average, " \
+                        "*** Based on the build history of these packages "
+                        "on your system, I can estimate that emerging them "
+                        "usually takes, on average, "
                         "%(days)d days, %(hours)d hrs, %(minutes)d mins, and %(seconds)d secs.\n") %
-                        {'days': total.seconds // (24 * 3600),\
-                         'hours': (total.seconds % (24 * 3600)) // 3600,\
-                         'minutes': ((total.seconds % (24 * 3600))  % 3600) //  60,\
+                        {'days': total.seconds // (24 * 3600),
+                         'hours': (total.seconds % (24 * 3600)) // 3600,
+                         'minutes': ((total.seconds % (24 * 3600))  % 3600) //  60,
                          'seconds': ((total.seconds % (24 * 3600))  % 3600) %  60}, 'note')
             self.term.append(TAB_PROCESS, _(
-                        "*** Note: If you have a lot of programs running on " \
-                        "your system while porthole is emerging packages, " \
-                        "or if you have changed your hardware since the " \
-                        "last time you built some of these packages, this " \
+                        "*** Note: If you have a lot of programs running on "
+                        "your system while porthole is emerging packages, "
+                        "or if you have changed your hardware since the "
+                        "last time you built some of these packages, this "
                         "estimate may be inaccurate.\n"), 'note')
 
     def set_save_buffer(self):
@@ -1095,7 +1097,7 @@ class ProcessManager: #dbus.service.Object):
         self.buffer_to_save = self.term.view_buffer[self.buffer_num]
         self.buffer_type = self.term.view_buffer_types[self.buffer_num]
         debug.dprint("TERMINAL: set_save_buffer: " + str(self.buffer_num) + " type: " + self.buffer_type)
-        return (self.buffer_num != None)
+        return self.buffer_num != None
 
     def open_ok_func(self, filename):
         """callback function from file selector"""
@@ -1109,7 +1111,7 @@ class ProcessManager: #dbus.service.Object):
         else:
             self.filename = filename
             self.set_statusbar(_("*** File Loading... Processing..."))
-            return True;
+            return True
 
     def do_open(self, widget, window=None):
         """opens the file selector for file to open"""
@@ -1166,12 +1168,12 @@ class ProcessManager: #dbus.service.Object):
         debug.dprint("LOG: Entering save_as_ok_func")
         old_filename = self.filename
 
-        if (not self.filename or filename != self.filename):
+        if not self.filename or filename != self.filename:
             if os.path.exists(filename):
                 err = _("Ovewrite existing file '%s'?")  % filename
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                            Gtk.MessageType.QUESTION,
-                                           Gtk.ButtonsType.YES_NO, err);
+                                           Gtk.ButtonsType.YES_NO, err)
                 result = dialog.run()
                 dialog.destroy()
                 if result != Gtk.ResponseType.YES:
@@ -1233,7 +1235,7 @@ class ProcessManager: #dbus.service.Object):
             err = _("Cannot open file '%(filename)s': %(errmsg)s") % d
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                        Gtk.MessageType.INFO,
-                                       Gtk.ButtonsType.OK, err);
+                                       Gtk.ButtonsType.OK, err)
             # fixme unused result
             result = dialog.run()
             dialog.destroy()
@@ -1262,7 +1264,7 @@ class ProcessManager: #dbus.service.Object):
                 err = _("Cannot back up '%(filename)s' to '%(bak_filename)s': %(errmsg)s") % d
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                            Gtk.MessageType.INFO,
-                                           Gtk.ButtonsType.OK, err);
+                                           Gtk.ButtonsType.OK, err)
                 dialog.run()
                 dialog.destroy()
                 return False
@@ -1291,10 +1293,10 @@ class ProcessManager: #dbus.service.Object):
             result = True
         except IOError as xxx_todo_changeme3:
             (errnum, errmsg) = xxx_todo_changeme3.args
-            err = ("Error writing to '%s': %s") % (self.filename, errmsg)
+            err = "Error writing to '%s': %s" % (self.filename, errmsg)
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                        Gtk.MessageType.INFO,
-                                       Gtk.ButtonsType.OK, err);
+                                       Gtk.ButtonsType.OK, err)
             dialog.run()
             dialog.destroy()
 
@@ -1307,7 +1309,7 @@ class ProcessManager: #dbus.service.Object):
                 err = _("Can't restore backup file '%(filename)s' to '%(bak_filename)s': %(errmsg)s\nBackup left as '%(bak_filename)s'") % d
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                            Gtk.MessageType.INFO,
-                                           Gtk.ButtonsType.OK, err);
+                                           Gtk.ButtonsType.OK, err)
                 dialog.run()
                 dialog.destroy()
 
@@ -1324,7 +1326,7 @@ class ProcessManager: #dbus.service.Object):
                 msg = _("Save log to '%s'?") % self.filename
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                            Gtk.MessageType.QUESTION,
-                                           Gtk.ButtonsType.YES_NO, msg);
+                                           Gtk.ButtonsType.YES_NO, msg)
                 dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
                 result = dialog.run()
                 dialog.destroy()
@@ -1342,7 +1344,7 @@ class ProcessManager: #dbus.service.Object):
             msg = "Buffer already saved &/or has not been modified: Proceed?"
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                        Gtk.MessageType.QUESTION,
-                                       Gtk.ButtonsType.YES_NO, msg);
+                                       Gtk.ButtonsType.YES_NO, msg)
             dialog.add_button(Gtk.STOCK_CANCEL, Gtk.ResponseType.CANCEL)
             result = dialog.run()
             dialog.destroy()

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Reader Class: CommonReader
 
     Copyright (C) 2003 - 2008 Fredrik Arnerup, Brian Dolbec,
@@ -19,7 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 #import dummy_threading as _threading
 import threading
@@ -38,9 +38,9 @@ class CommonReader(threading.Thread):
         # cancelled will be set when the thread should stop
         self.cancelled = False
         # quit even if thread is still running
-        self.setDaemon(1)
+        self.daemon = True
         print("threading.enumerate() = ",threading.enumerate(), file=stderr)
-        print("this thread is :", _thread.get_ident(), ' current thread ', threading.currentThread(), file=stderr)
+        print("this thread is :", _thread.get_ident(), ' current thread ', threading.current_thread(), file=stderr)
 
     def please_die( self ):
         """ Tell the thread to die """

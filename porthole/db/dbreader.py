@@ -47,7 +47,7 @@ class DatabaseReader(threading.Thread):
 
     def __init__(self, callback):
         threading.Thread.__init__(self)
-        self.setDaemon(1)     # quit even if this thread is still running
+        self.daemon = True     # quit even if this thread is still running
         self.id = datetime.datetime.now().microsecond
         print("DBREADER: DatabaseReader.id initialized to ", self.id)
         self.db = DBBase()        # the database
@@ -130,8 +130,8 @@ class DatabaseReader(threading.Thread):
             if category in ["metadata", "distfiles", "eclass"]:
                 return 0
             # why does getallnodes() return timestamps?
-            if (name.endswith('tbz2') or \
-                    name.startswith('.') or \
+            if (name.endswith('tbz2') or 
+                    name.startswith('.') or 
                     name in ['timestamp.x', 'metadata.xml', 'CVS'] ):
                 return 0
             data = Package(entry)

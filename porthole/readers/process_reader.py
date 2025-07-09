@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole  ProcessOutputReader Class
     It watches a processes output and records it for another process to use
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 import os
 import threading
@@ -38,7 +38,7 @@ class ProcessOutputReader(threading.Thread):
         threading.Thread.__init__(self)
         # set callback
         self.dispatcher = dispatcher
-        self.setDaemon(1)  # quit even if this thread is still running
+        self.daemon = True  # quit even if this thread is still running
         self.process_running = False
         # initialize only, self.fd set by ProcessManager._run()
         self.fd = None
@@ -89,7 +89,7 @@ class ProcessOutputReader(threading.Thread):
                         char = None
                 if char:
                     # if the string is currently being accessed
-                    while(self.string_locked):
+                    while self.string_locked:
                         # wait 50 ms and check again
                         time.sleep(0.05)
                     if self.record_output:

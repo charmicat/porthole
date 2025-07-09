@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole
     A graphical frontend to Portage
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 import datetime
 _id = datetime.datetime.now().microsecond
 #print "STARTUP: id initialized to ", _id
@@ -87,12 +87,12 @@ def create_dir(new_dir):
 
 
 def import_error(e):
-    print("*** Error loading porthole modules!\n*** If you are running a", \
-        "local (not installed in python's site-packages) version, please use the '--local'", \
-        "or '-l' flag.\n", \
-        "*** Otherwise, verify that porthole was installed correctly and", \
-        "that python's path includes the site-packages directory.\n",\
-        "If you have recently updated python, then run 'python-updater'\n")
+    print("*** Error loading porthole modules!\n*** If you are running a",
+          "local (not installed in python's site-packages) version, please use the '--local'",
+          "or '-l' flag.\n",
+          "*** Otherwise, verify that porthole was installed correctly and",
+          "that python's path includes the site-packages directory.\n",
+          "If you have recently updated python, then run 'python-updater'\n")
     print("Your sys.path: %s\n" % sys.path)
     print("Your sys.version: %s\n" % sys.version)
     print("Original exception was: ImportError: %s\n" % e)

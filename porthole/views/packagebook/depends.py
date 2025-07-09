@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Depends parsing and associated class definitions
     retieves parses and stores package dependency information.
 
@@ -20,7 +20,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 from gettext import gettext as _
 
@@ -63,16 +63,16 @@ class DependKey(object):
 
         if mytype in ['USING', 'NOTUSING']:
             #debug.dprint("DependKey: ['USING', 'NOTUSING'], mytype = " + mytype)
-            return ((mytype, useflag, atom, parent))
+            return mytype, useflag, atom, parent
         elif mytype in ['OPTION', 'GROUP']:
             #debug.dprint("DependKey: ['OPTION', 'GROUP'], mytype = " + mytype)
-            return ((mytype, useflag, atom, parent, tuple(children)))
+            return mytype, useflag, atom, parent, tuple(children)
         elif mytype in ['LAZY']:
             #debug.dprint("DependKey: ['LAZY'], mytype = " + mytype)
-            return ((mytype, atom, parent))
+            return mytype, atom, parent
         else:  # is a package DependAtom, so type checking is not neccessary
             #debug.dprint("DependKey: Package Dep, mytype = " + mytype)
-            return ((mytype, useflag, atom))
+            return mytype, useflag, atom
 
 
 class DependAtom(DependKey):

@@ -30,7 +30,7 @@ IMPORT_DONE = False
 import datetime
 _id = datetime.datetime.now().microsecond
 print("PORTAGELIB: id initialized to ", _id)
-import imp
+import importlib
 import os
 
 from gettext import gettext as _
@@ -518,7 +518,7 @@ def get_size(mycpv):
         mystr = str(mysum[0]/1024)
         #debug.dprint( "PORTAGELIB: get_size; mystr = " + mystr)
         mycount=len(mystr)
-        while (mycount > 3):
+        while mycount > 3:
             mycount-=3
             mystr=mystr[:mycount]+","+mystr[mycount:]
         mysum[1]=mystr+" kB"
@@ -667,7 +667,7 @@ def get_system_pkgs(): # lifted from gentoolkit
                 resolved.append(get_full_name(pkg))
             else:
                 unresolved.append(get_full_name(cpv))
-    return (resolved + unresolved)
+    return resolved + unresolved
 
 
 def find_best_match(search_key): # lifted from gentoolkit and updated
@@ -830,8 +830,6 @@ func = {'get_virtuals': get_virtuals,
         'get_versions': get_versions,
         'get_hard_masked': get_hard_masked,
         'get_property': get_property,
-        'get_best_ebuild': get_best_ebuild,
-        'get_dep_ebuild': get_dep_ebuild,
         'get_best_ebuild': get_best_ebuild,
         'get_dep_ebuild': get_dep_ebuild,
         'get_size': get_size,

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-'''
+"""
     Porthole Reader Class: ToolChain
 
     Copyright (C) 2008 Brian Dolbec, Heil Van Camp
@@ -19,7 +19,7 @@
     You should have received a copy of the GNU General Public License
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-'''
+"""
 
 
 class ToolChain:
@@ -28,8 +28,8 @@ class ToolChain:
         self.build = build
         self.tc_conf = ""
         self.tc_stdc = ""
-        self.TC_build = ["sys-kernel/linux-headers", "sys-libs/glibc", self.tc_conf, \
-                      "sys-devel/binutils", "sys-devel/gcc", self.tc_stdc]
+        self.TC_build = ["sys-kernel/linux-headers", "sys-libs/glibc", self.tc_conf,
+                         "sys-devel/binutils", "sys-devel/gcc", self.tc_stdc]
         self.TC="linux-headers glibc $tc_conf_regx binutils-[0-9].* gcc-[0-9].* glibc binutils-[0-9].* gcc-[0-9].* $tc_stdc"
         self.TC_glb="glibc $tc_conf_regx binutils-[0-9].* gcc-[0-9].* glibc binutils-[0-9].* gcc-[0-9].* $tc_stdc"
         self.TCmini="$tc_conf_regx binutils-[0-9].* gcc-[0-9].* binutils-[0-9].* gcc-[0-9].* $tc_stdc"
