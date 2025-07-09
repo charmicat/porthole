@@ -1229,8 +1229,8 @@ class ProcessManager: #dbus.service.Object):
         self.set_statusbar(_("*** Loading File : %s") % self.filename)
         try:
             self.reader.f = open(filename, "r")
-        except IOError as xxx_todo_changeme1:
-            (errnum, errmsg) = xxx_todo_changeme1.args
+        except IOError as err:
+            errnum, errmsg = err.args
             d = {"filename" : filename, "errmsg" : errmsg}
             err = _("Cannot open file '%(filename)s': %(errmsg)s") % d
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
@@ -1257,8 +1257,8 @@ class ProcessManager: #dbus.service.Object):
         try:
             if os.path.exists(self.filename):
                 os.rename(self.filename, bak_filename)
-        except (OSError, IOError) as xxx_todo_changeme2:
-            (errnum, errmsg) = xxx_todo_changeme2.args
+        except (OSError, IOError) as err:
+            errnum, errmsg = err.args
             if errnum != errno.ENOENT:
                 d = {"filename" : self.filename, "bak_filename" : bak_filename, "errmsg" : errmsg}
                 err = _("Cannot back up '%(filename)s' to '%(bak_filename)s': %(errmsg)s") % d
@@ -1291,9 +1291,9 @@ class ProcessManager: #dbus.service.Object):
             file.close()
             self.buffer_to_save.set_modified(False)
             result = True
-        except IOError as xxx_todo_changeme3:
-            (errnum, errmsg) = xxx_todo_changeme3.args
-            err = "Error writing to '%s': %s" % (self.filename, errmsg)
+        except IOError as err:
+            errnum, errmsg = err.args
+            err = ("Error writing to '%s': %s") % (self.filename, errmsg)
             dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,
                                        Gtk.MessageType.INFO,
                                        Gtk.ButtonsType.OK, err)
@@ -1303,8 +1303,8 @@ class ProcessManager: #dbus.service.Object):
         if not result and have_backup:
             try:
                 os.rename(bak_filename, self.filename)
-            except OSError as xxx_todo_changeme:
-                (errnum, errmsg) = xxx_todo_changeme.args
+            except OSError as err:
+                errnum, errmsg = err.args
                 d = {"filename" : self.filename, "bak_filename" : bak_filename, "errmsg" : errmsg}
                 err = _("Can't restore backup file '%(filename)s' to '%(bak_filename)s': %(errmsg)s\nBackup left as '%(bak_filename)s'") % d
                 dialog = Gtk.MessageDialog(self.window, Gtk.DialogFlags.MODAL,

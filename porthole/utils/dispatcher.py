@@ -69,11 +69,11 @@ class Dispatch_wait:
         self.callback_args = args
         self.callback_kwargs = kwargs
         self.continue_io_watch = True
-        self.callqueue = queue.Queue(0) # thread safe queue
+        self.queue = queue.Queue(0) # thread safe queue
         self.reply = queue.Queue(0)
         self.callpipe_r, self.callpipe_w = os.pipe()
         self.wait = {}  # dict of boolleans for incoming thread id's waiting for replies
-        self.Semaphore = threading.Semaphore()
+        self.semaphore = threading.Semaphore()
         GObject.io_add_watch(self.callpipe_r, GObject.IO_IN, self.on_calldata)
 
     def __call__(self, *args):  # this function is running in the calling thread
@@ -83,11 +83,11 @@ class Dispatch_wait:
         # write to pipe afterwards
         os.write(self.callpipe_w, b"X")
         # now wait for the reply
-        self.semaphore.aquire()
+        self.semaphore.acquire()
         self.wait[_id] = True
-        self.Semaphore.release()
+        self.semaphore.release()
         # fixme hidden *args
-        while self.wait[myid]:
+        while self.wait[_id]:
             #pass the time waiting for a reply by having a snooze
             time.sleep(0.01)
         myreply, reply_id = self.reply.get()
@@ -103,7 +103,7 @@ class Dispatch_wait:
                 reply = self.callback(*( self.callback_args + args), **self.callback_kwargs)
             else:
                 reply = self.callback(*args, **self.callback_kwargs)
-            self.semaphore.aquire()
+            self.semaphore.acquire()
             self.reply.put([reply, _id])
             self.wait[_id] = False
             self.semaphore.release()

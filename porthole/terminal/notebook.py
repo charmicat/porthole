@@ -219,7 +219,7 @@ class TerminalNotebook:
             pos = self.notebook.page_num(self.info_tab)
         elif tab == TAB_QUEUE:
             pos = self.notebook.page_num(self.queue_tab)
-        if pos is not -1:
+        if pos != -1:
             debug.dprint("NOTEBOOK: hiding tab %s, pos %s." % (tab, pos))
             self.notebook.remove_page(pos)
             self.tab_showing[tab] = False

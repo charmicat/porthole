@@ -81,8 +81,8 @@ def create_dir(new_dir):
     print("STARTUP: create_dir; ", new_dir + " does not exist, creating...")
     try:
         os.mkdir(new_dir)
-    except OSError as xxx_todo_changeme:
-        (errnum, errmsg) = xxx_todo_changeme.args
+    except OSError as e:
+        errnum, errmsg = e.args
         print("Failed to create %s:" % new_dir, errmsg)
 
 
@@ -126,8 +126,21 @@ def print_version():
     print("Porthole ", version)
     sys.exit(0)
 
+def usage():
+    """Display basic command line help"""
+    tabs = "\t\t"
+    print("Usage: porthole [OPTION...]\n")
+    print("  -h, --help" + tabs + "Show this help message")
+    print("  -l, --local" + tabs +
+          "Run a local version (use modules in current directory)")
+    print("  -v, --version" + tabs + "Output version information and exit")
+    print("  -d, --debug string" + tabs +
+          "Output debugging information to stderr")
+    print("  -b, --backend [portage, pkgcore]" + tabs + "Select backend")
+
 def set_backend(arg):
     if arg in Choices:
+        global BACKEND
         # fixme unused BACKEND
         BACKEND = Choices[arg]
         print("***** BACKEND set to:", BACKEND)
@@ -163,9 +176,6 @@ def main():
     #print "STARTUP: main(); loading preferences"
     config.Prefs = preferences.PortholePreferences(prefs_additions)
     #print config.Prefs
-    #print "STARTUP: main(); importing version"
-    # fixme unused version
-    from porthole.version import version
     #print "STARTUP: main(); importing utils"
     from porthole.utils import debug
     from porthole import backends
@@ -202,9 +212,6 @@ def main():
     Gtk.main()
     # save the prefs to disk for next time
     config.Prefs.save()
-    # fixme unused hits, misses
-    hits = backends.portage_lib.get_metadata.hits
-    misses = backends.portage_lib.get_metadata.misses
     print("metadata", backends.portage_lib.get_metadata.cache_info())
     sys.exit(0)
 

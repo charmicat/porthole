@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from setuptools import setup, find_packages  # or find_namespace_packages
 from porthole.version import version as p_version
