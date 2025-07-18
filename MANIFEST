@@ -43,10 +43,10 @@ porthole/dialogs/command.py
 porthole/dialogs/configure.py
 porthole/dialogs/fileselector.py
 porthole/dialogs/simple.py
-porthole/glade/about.glade
-porthole/glade/advemerge.glade
-porthole/glade/config.glade
-porthole/glade/porthole.glade
+porthole/glade/about.ui
+porthole/glade/advemerge.ui
+porthole/glade/config.ui
+porthole/glade/porthole.ui
 porthole/loaders/__init__.py
 porthole/loaders/loaders.py
 porthole/packagebook/__init__.py

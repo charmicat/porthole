@@ -31,8 +31,8 @@ If you don't want to use the ebuild, you can download the tarball
 (porthole-0.5.0.tar.bz2) and install it yourself.
 
 Porthole requires:
->=python-2.3
->=PyGTK-2.4
+>=python-3.13
+>=PyGObject-3.52.3
 >=libglade-2.5.0
 and, of course, Portage
 
